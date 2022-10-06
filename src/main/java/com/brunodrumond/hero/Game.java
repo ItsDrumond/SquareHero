@@ -15,20 +15,23 @@ import java.io.IOException;
 public class Game {
     private Screen screen;
     private Hero hero = new Hero(10, 10);
+    public void moveHero(Position position){
+        hero.setPosition(position);
+    }
 
     private void processKey(KeyStroke key) throws IOException{
 
         if(key.getKeyType() == KeyType.ArrowUp){
-            hero.setY(hero.getY()-1);
+            moveHero(hero.moveUp());
         }
         else if(key.getKeyType() == KeyType.ArrowDown){
-            hero.setY(hero.getY()+1);
+            moveHero(hero.moveDown());
         }
         else if(key.getKeyType() == KeyType.ArrowLeft){
-            hero.setX(hero.getX()-1);
+            moveHero(hero.moveLeft());
         }
         else if(key.getKeyType() == KeyType.ArrowRight){
-            hero.setX(hero.getX()+1);
+            moveHero(hero.moveRight());
         }
         else if(key.getKeyType()==KeyType.Character && key.getCharacter() == 'q'){
             screen.close();
