@@ -10,16 +10,40 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.*;
 
 public class Arena {
     private int width_;
     private int height_;
+    private List<Wall> walls;
     public Arena(int width, int height){
         width_ = width;
         height_ = height;
+        this.walls = createWalls();
     }
+    private List<Wall> createWalls() {
+        List<Wall> walls = new ArrayList<>();
+        for (int c = 0; c < width_; c++) {
+            walls.add(new Wall(c, 0));
+            walls.add(new Wall(c, height_- 1));
+        }
+        for (int r = 1; r < height_ - 1; r++) {
+            walls.add(new Wall(0, r));
+            walls.add(new Wall(width_ - 1, r));
+        }
+        return walls;
+    }
+
+    public boolean canHeroMove(Position position){
+        for (Wall wall : walls){
+            if(wall.getX_() == position.getX() && wall.getY_() == position.getY()) return false;
+        }
+        return true;
+    }
+
     public void moveHero(Position position){
-        hero.setPosition(position);
+        if (canHeroMove(position))
+            hero.setPosition(position);
     }
     private Hero hero = new Hero(10, 10);
     public void processKey(KeyStroke key) throws IOException {
@@ -41,5 +65,7 @@ public class Arena {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width_, height_), ' ');
         hero.draw(graphics);
+        for (Wall wall : walls)
+            wall.draw(graphics);
     }
 }
