@@ -37,10 +37,9 @@ public class Arena {
             moveHero(hero.moveRight());
         }
     }
-    public void draw(Screen screen){
-        TextGraphics graphics = screen.newTextGraphics();
+    public void draw(TextGraphics graphics){
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width_, height_), ' ');
-        hero.draw(screen);
+        hero.draw(graphics);
     }
 }
