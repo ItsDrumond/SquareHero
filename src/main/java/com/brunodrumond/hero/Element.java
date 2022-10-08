@@ -18,6 +18,9 @@ public abstract class Element {
     public int getY_() {
         return position.getY();
     }
+    public Position getPosition() {
+        return position;
+    }
 
     public abstract void draw(TextGraphics graphics);
 }
