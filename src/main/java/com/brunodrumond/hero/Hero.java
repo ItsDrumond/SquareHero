@@ -7,15 +7,15 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
-public class Hero {
+public class Hero extends Element {
     public Hero(int x, int y){
-        position = new Position(x,y);
+        super(x,y);
     }
+    @Override
     public void draw(TextGraphics graphics){
         graphics.setBackgroundColor(TextColor.Factory.fromString("#FFFFFF"));
         graphics.fillRectangle(new TerminalPosition(position.getX(), position.getY()), new TerminalSize(1, 1), ' ');
     }
-    private Position position;
 
     public Position getPosition() {
         return position;
