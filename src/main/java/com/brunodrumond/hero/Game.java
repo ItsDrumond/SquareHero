@@ -46,6 +46,10 @@ public class Game {
                 screen.close();
             }
             arena.processKey(key);
+            if(arena.verifyMonsterCollision()){
+                System.out.println("YOU ARE DEAD!");
+                screen.close();
+            }
         }
     }
 }
